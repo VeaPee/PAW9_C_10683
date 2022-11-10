@@ -24,8 +24,7 @@
         </v-card>
 
         <v-card>
-            <v-expansion-panel>
-                <v-data-table :headers="headers" :items="todos" :search="search" :expanded="expanded" item-key="task" show-expand>   
+            <v-data-table :headers="headers" :items="todos" :search="search" :expanded="expanded" item-key="task" show-expand>   
                 <template v-slot:[`item.priority`]="{ item }">
                     <v-icon v-show="item.priority=='Penting'" color="red">mdi-alert-octagon</v-icon>
                     <v-icon v-show="item.priority=='Tidak Penting'" color="blue">mdi-alert-octagon</v-icon>
@@ -83,9 +82,7 @@
                     <v-btn small class="button" fab color="red" @click="editItem(item)"><v-icon color="white">mdi-pen</v-icon></v-btn>
                     <v-btn small class="button" fab color="success" @click="deleteItem(item)"><v-icon color="white">mdi-trash-can</v-icon></v-btn>
                 </template>
-
-                </v-data-table>
-            </v-expansion-panel>
+            </v-data-table>
         </v-card>
         
         <v-dialog v-model="dialog" persistent max-width="600px">
@@ -141,6 +138,7 @@
                         value=formTodo.task
                         required>
                         </v-text-field>
+
                         <v-select
                         v-model="formTodo.priority"
                         :items="[`Penting`, `Biasa`, `Tidak Penting`]"
@@ -174,7 +172,7 @@
         <v-dialog v-model="dialogDelete" persistent max-width="600px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Are you sure to delete?</span>
+                    Are you sure to delete?
                 </v-card-title>
                 
                 <v-card-actions>
@@ -248,10 +246,10 @@ export default{
             this.dialogDelete = false
         },
         saveEdit(){
-            this.temp.task = this.formTodo.task;
-            this.temp.priority = this.formTodo.priority;
-            this.temp.note = this.formTodo.note;
-            this.temp.status = this.formTodo.status;
+            this.item.task = this.formTodo.task;
+            this.item.priority = this.formTodo.priority;
+            this.item.note = this.formTodo.note;
+            this.item.status = this.formTodo.status;
             
             this.resetForm();
             this.dialogEdit = false;
@@ -271,7 +269,7 @@ export default{
                 note: item.note,
                 status: item.status,
             };
-            this.temp = item
+            this.item = item
             
             this.dialogEdit = true;
             
